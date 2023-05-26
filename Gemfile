@@ -45,7 +45,7 @@ end
 
 group :test do
   gem "shoulda-matchers"
-  gem "data_cleaner"
+  gem "database_cleaner"
   gem "factory_bot_rails"
   gem "faker"
 end
