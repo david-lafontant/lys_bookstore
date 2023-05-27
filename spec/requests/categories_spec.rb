@@ -9,7 +9,7 @@ let!(:category_id) {categories.first.id}
 describe 'GET /categories' do
   before {get '/api/v1/categories'}
   it 'returns all categories' do
-    expext(json).not_to be_empty
+    expect(json).not_to be_empty
     expect(json.size).to eq(10)
   end
 
@@ -39,7 +39,7 @@ describe 'POST /category' do
   context 'When the request is invalid' do
     before { post '/api/v1/categories', params: { name: '' } }
     it 'returns a validation error message' do
-      expect(response.body).to include("Category name length should be betwen 3 and 60 characters long")
+      expect(response.body).to include("is too short (minimum is 3 characters)")
     end
 
     it 'returns status code 422' do
@@ -52,7 +52,7 @@ describe 'POST /category' do
     before { post '/api/v1/categories', params: { name: 'dramaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' } }
 
     it 'returns a validation error message' do
-      expect(response.body).to include("Category name length should be betwen 3 and 60 characters long")
+      expect(response.body).to include("is too long (maximum is 60 characters)")
     end
 
     it 'returns status code 422' do
@@ -64,10 +64,10 @@ end
 
 
 # DELETE /categories/:id
- describe 'DELETE /categories/id' do
-   before { delete "api/v1/categories/#{category_id}"}
-   it 'returns status code 204'do
-     expect(response).to have_http_stats(204)
+ describe 'DELETE /categories/:id' do
+   before { delete "/api/v1/categories/#{category_id}" }
+   it 'returns status code 204' do
+     expect(response).to have_http_status(204)
    end
  end
 
