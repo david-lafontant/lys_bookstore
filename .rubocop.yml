@@ -1,0 +1,30 @@
+require: rubocop-rails
+
+AllCops:
+  DisplayCopNames: true
+
+  Exclude:
+    - bin/**/*
+    - db/schema.rb
+    - node_modules/**/*
+
+tyle/Documentation:
+  Enabled: false
+
+Metrics/ClassLength:
+  Exclude:
+    - "spec/requests/books_spec.rb"
+    - "spec/requests/categories_spec.rb"
+
+Metrics/BlockLength:
+  Exclude:
+    - "spec/requests/books_spec.rb"
+    - "spec/requests/categories_spec.rb"
+
+Layout/LineLength:
+  Exclude:
+    - "spec/requests/books_spec.rb"
+    - "spec/requests/categories_spec.rb"
+
+Rails/FilePath:
+  Enabled: false
