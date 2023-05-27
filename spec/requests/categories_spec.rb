@@ -25,7 +25,8 @@ end
 describe 'POST /category' do
 
   context 'When the request is valid' do
-    before{post '/api/v1/categories' params: 'drama'}
+ 
+    before { post '/api/v1/categories', params: { name: 'drama' } }
     it 'creates a category' do
       expect(json['name']).to eq('drama')
     end
@@ -36,7 +37,7 @@ describe 'POST /category' do
 
   end
   context 'When the request is invalid' do
-    before{post '/api/v1/categories' params: ''}
+    before { post '/api/v1/categories', params: { name: '' } }
     it 'returns a validation error message' do
       expect(response.body).to include("Category name length should be betwen 3 and 60 characters long")
     end
@@ -46,8 +47,10 @@ describe 'POST /category' do
     end
 
   end
+
   context 'When the request is valid' do
-    before{post '/api/v1/categories' params: 'dramaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}
+    before { post '/api/v1/categories', params: { name: 'dramaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' } }
+
     it 'returns a validation error message' do
       expect(response.body).to include("Category name length should be betwen 3 and 60 characters long")
     end
